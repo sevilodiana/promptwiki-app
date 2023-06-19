@@ -9,7 +9,7 @@ const Home = () => {
             <span className="orange_gradient text-center"> AI-Powered Prompts</span>
         </h1>
         <p className="desc text-center">
-            PromptWiki is an open-source AI prompting tool for modern world to discover, 
+            PromptWiki is an open-source AI tool for modern world to discover, 
             create, share and test creative prompts.
         </p>
 
