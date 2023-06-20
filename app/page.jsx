@@ -1,4 +1,5 @@
 import Feed from '@components/Feed';
+import Modal from '@components/Modal';
 
 const Home = () => {
   return (
@@ -12,8 +13,9 @@ const Home = () => {
             PromptWiki is an open-source AI tool for modern world to discover, 
             create, share and test creative prompts.
         </p>
-
+        
         <Feed />
+       
     </section>
   )
 }
