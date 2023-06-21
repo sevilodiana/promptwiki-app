@@ -1,4 +1,5 @@
 import {Configuration, OpenAIApi} from "openai";
+import { pipeline } from "node:stream/promises";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -6,27 +7,21 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-export const POST = async (req) => {
+export const POST = async (req, res) => {
   try {
-   // req="hello";
-    /* const reqBody = JSON.parse(req.body);
-    const userPrompt = reqBody['prompt'] || ''; */
+    
+    const {prompt} = await req.json();
     const response = await openai.createCompletion({ 
       //prompt: "What is 2 plus 2",
-      prompt: req,
+      prompt: prompt,
       model: 'text-davinci-003',
-      temperature: 0,
+      temperature: 0.6,
       max_tokens: 100,
       n: 1,
   });
-
-  
-      return new Response(JSON.stringify(response.data.choices[0].text.replace(/^\n+/, '')), { status: 200 })
+      console.log(JSON.stringify(response.data.choices[0].text.replace(/^\n+/, '').toString()));
+      return new Response(JSON.stringify(response.data.choices[0].text.replace(/^\n+/, '').toString()), { status: 200 }) 
   } catch (error) {
-      return new Response("Failed to run api", { status: 500 })
+      return new Response("Failed to run api because you are a piece of shit", { status: 500 })
   }
 } 
-
-function generatePrompt(prompt) {
-  return prompt
-}

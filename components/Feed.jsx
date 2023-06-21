@@ -1,6 +1,6 @@
 'use client';
 
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Suspense} from 'react';
 import PromptCard from './PromptCard';
 import Modal from '@components/Modal';
 
@@ -62,26 +62,21 @@ const Feed = () => {
   }
 
   const handleShowModal = async (post, username) => {
-   // setModalText("helllo");
-   // post.preventDefault();
-    setModalUser(username);
-    setShowModal(true);
-    console.log(post);
-    setLoading(true);
-
-    const response = await fetch('/api/generate/', {
-      "method": "POST",
-      "body": JSON.stringify({
-          "prompt": post
-      })
-  })
-    const data = await response.json();
-    console.log(data);
-
-    setModalText(data);
+    /* e.preventDefault(); */
     
 
-    setLoading(false);
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({prompt: post.trim()}),
+  })
+    const data = res.json();
+    console.log(data);
+    setModalText(data);
+    setModalUser(username);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
@@ -140,11 +135,12 @@ const handleTagClick = (tagName) => {
 
         
       </form>
-      
-      {loading && 
-      <div className="text-black">
-        Please wait...
-      </div>}
+      <Modal 
+      showModal={showModal}
+      handleCloseModal={handleCloseModal}
+      text={modalText}   
+      userName={modalUser}   
+      />
       {/* All Prompts */}
       {searchText ? (
         <PromptCardList
@@ -160,12 +156,8 @@ const handleTagClick = (tagName) => {
         />
       )}
 {
-      <Modal 
-      showModal={showModal}
-      handleCloseModal={handleCloseModal}
-      text={modalText}   
-      userName={modalUser}   
-      /> }
+  
+       }
       
     </section>
     

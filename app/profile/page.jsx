@@ -48,13 +48,17 @@ const MyProfile = () => {
   };
 
   return (
-    <Profile
+    <section>
+ <Profile
       name='My'
       desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
+    </section>
+   
+    
   );
 };
 
