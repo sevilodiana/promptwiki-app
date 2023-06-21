@@ -2,10 +2,9 @@ A full stack web application where you share and create creative prompts to AI t
 
 Tools used:
 
-React
-Next.js
-Tailwind
-Mongodb
-Mongoose
-OpenAI Completion
-Google Cloud APIs and Services
+* Next.js<br>
+* Tailwind<br>
+* Mongodb<br>
+* Mongoose<br>
+* OpenAI Completion<br>
+* Google Cloud APIs and Services<br>
