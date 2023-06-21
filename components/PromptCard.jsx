@@ -5,9 +5,10 @@ import Image from 'next/image';
 import {useSession} from 'next-auth/react';
 import {usePathname, useRouter} from 'next/navigation';
 
-const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}) => {
+
+const PromptCard = ({post, handleTagClick, handleEdit, handleDelete, handleShowModal}) => {
   const {data: session} = useSession();
-  const [copied, setCopied] = useState("");
+  const [promptText, setPromptText] = useState("");
   const pathName = usePathname();
   const router = useRouter();
   
@@ -19,11 +20,9 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}) => {
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
 
-  const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
-    setTimeout(() => setCopied(""), 3000);
-  }
+ /*  const handleGetText = () => {
+    setPromptText(post.prompt);
+  } */
 
   return (
     <div className="prompt_card">
@@ -48,13 +47,13 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}) => {
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
+        <div className="copy_btn" onClick={() => handleShowModal && handleShowModal(post.prompt, post.creator.username)}>
             <Image 
               src='/assets/icons/chat.svg'             
               width={25}
               height={25}
             />
-        </div>         
+        </div>     
       </div>   
         <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
         <p className="font-inter text-sm blue_gradient cursor-pointer"
