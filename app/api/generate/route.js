@@ -22,6 +22,6 @@ export const POST = async (req, res) => {
       console.log(JSON.stringify(response.data.choices[0].text.replace(/^\n+/, '').toString()));
       return new Response(JSON.stringify(response.data.choices[0].text.replace(/^\n+/, '').toString()), { status: 200 }) 
   } catch (error) {
-      return new Response("Failed to run api because you are a piece of shit", { status: 500 })
+      return new Response("Something went wrong. Contact support.", { status: 500 })
   }
 } 
